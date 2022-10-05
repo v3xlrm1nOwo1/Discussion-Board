@@ -1,7 +1,11 @@
+from multiprocessing import context
 from unicodedata import name
 from django.shortcuts import render
 from django.http import HttpResponse
 import random
+from . import models
+# import .models
+# import models
 
 # Create your views here.
 
@@ -14,3 +18,11 @@ def test(request):
                         <p>Lev: {lev}</p>"""
 
     return HttpResponse(HTML_RESPONSE)
+
+
+# Home Page
+def home(request):
+
+    boards = models.Board.objects.all()
+    context = {'boards': boards}
+    return render(request, 'home.html', context)
