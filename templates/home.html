@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Boards</title>
+    </head>
+    <body>
+        <h1>Boards</h1>
+
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Board</th>
+                    <th>Topics</th>
+                    <th>Posts</th>
+                    <th>Last Post</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for board in boards %}
+                <tr>
+                    <th>{{board.name}}</th>
+                    <th>0</th>
+                    <th>0</th>
+                    <th>0</th>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </body>
+</html>
