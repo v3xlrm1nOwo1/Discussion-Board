@@ -8,7 +8,7 @@
     <body>
         <div class="container">
             <ol class="breadcrumb my-4">
-                <li class="breadcrumb-itme active">Board</li>
+                <li class="breadcrumb-itme active">Boards</li>
             </ol>
             <table class="table">
                 <thead class="thead-dark">
@@ -22,7 +22,7 @@
                 <tbody>
                     {% for board in boards %}
                     <tr>
-                        <td>{{board.name}}
+                        <td><a href="{% url 'board_topics' board.name%}">{{board.name}}</a>
                             <small class="text-muted d-block">{{board.description}}</small>
                         </td>
                         <td>0</td>

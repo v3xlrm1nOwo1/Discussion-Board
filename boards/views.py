@@ -1,6 +1,6 @@
 from multiprocessing import context
 from unicodedata import name
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 import random
 from . import models
@@ -26,3 +26,11 @@ def home(request):
     boards = models.Board.objects.all()
     context = {'boards': boards}
     return render(request, 'home.html', context)
+
+
+# board topics
+def board_topics(request, board_name):
+
+    board = get_object_or_404(models.Board, name=board_name)
+    context = {'board': board}
+    return render(request, 'topics.html', context)
