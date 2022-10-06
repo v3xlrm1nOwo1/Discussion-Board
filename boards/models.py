@@ -19,13 +19,13 @@ class Board(models.Model):
 class Topic(models.Model):
     subject = models.CharField(max_length=700)
     board = models.ForeignKey(Board, related_name="topics", on_delete=models.CASCADE)
-    create_by = models.ForeignKey(User, related_name="topics", on_delete=models.CASCADE)
-    create_dt = models.DateTimeField(auto_now_add=True)
+    created_by = models.ForeignKey(User, related_name="topics", on_delete=models.CASCADE)
+    created_dt = models.DateTimeField(auto_now_add=True)
 
 
 # Post Table
 class Post(models.Model):
-    subject = models.TextField(max_length=5000)
-    board = models.ForeignKey(Topic, related_name="posts", on_delete=models.CASCADE)
-    create_by = models.ForeignKey(User, related_name="posts", on_delete=models.CASCADE)
-    create_dt = models.DateTimeField(auto_now_add=True)
+    comment = models.TextField(max_length=5000)
+    topic = models.ForeignKey(Topic, related_name="posts", on_delete=models.CASCADE)
+    created_by = models.ForeignKey(User, related_name="posts", on_delete=models.CASCADE)
+    created_dt = models.DateTimeField(auto_now_add=True)

@@ -1,4 +1,5 @@
 {% extends 'base.html'%}
+
 {% block title %}{{board.name}}{% endblock %}
 
 {% block item %}
@@ -7,4 +8,30 @@
 {% endblock %}
 
 {% block body %}
+<div class="mb-4">
+    <a href="{% url 'new_topic' board.name %}" class="btn btn-primary">New Topic</a>
+</div>
+
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th>Topoic</th>
+            <th>Created By</th>
+            <th>Posts</th>
+            <th>Views</th>
+            <th>Created Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for topic in board.topics.all %}
+        <tr>
+            <td>{{topic.subject}}</td>
+            <td>{{topic.created_by}}</td>
+            <td>0</td>
+            <td>0</td>
+            <td>{{topic.created_dt}}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
 {% endblock %}
