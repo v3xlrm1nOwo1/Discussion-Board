@@ -25,14 +25,14 @@
                       <a class="dropdown-item" href="#">My account</a>
                       <a class="dropdown-item" href="#">Change password</a>
                       <div class="dropdown-divider"></div>
-                      <a class="dropdown-item" href="#">Log out</a>
+                      <a class="dropdown-item" href="{% url 'logout' %}">Log out</a>
                     </div>
                   </li>
                 </ul>
                   {%else%}
                   <form class="form-inline ml-auto">
                   <a href="#" class="btn btn-outline-secondary">login</a>
-                  <a href="url 'signup'" class="btn btn-primary ml-2">Signup</a>
+                  <a href="{% url 'signup' %}" class="btn btn-primary ml-2">signup</a>
                   </form>
                       {%endif%}
           
@@ -47,5 +47,8 @@
             {% endblock %}
         </div>
         {% endblock %}
+        <script src="{%static 'js/jquery-3.4.1.min.js'%}"></script>
+        <script src="{%static 'js/popper.min.js'%}"></script>
+      <script src="{%static 'js/bootstrap.min.js'%}"></script>
     </body>
 </html>
