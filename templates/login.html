@@ -1,8 +1,7 @@
 {% extends 'base.html' %}
 
 {% load static %}
-
-{% block title %}Sign Up{% endblock %}
+{% block title %}Log in{% endblock %}
 
 {% block stylesheet %}
   <link rel="stylesheet" href="{% static 'css/account.css' %}">
@@ -17,15 +16,16 @@
       <div class="col-lg-8 col-md-10 col-sm-12">
         <div class="card">
           <div class="card-body">
-            <h3 class="card-title">Sign up</h3>
+            <h3 class="card-title">Log in</h3>
             <form method="post" novalidate>
                 {% csrf_token %}
+                <button type="hidden" name="next" value="{{ next }}"></button>
                 {% include 'includes/form.html' %}
-                <button type="submit" class="btn btn-primary btn-block">Sig Up</button>
+                <button type="submit" class="btn btn-primary btn-block">Log in</button>
             </form>
           </div>
           <div class="card-footer text-muted text-center">
-            Already have an account? <a href="{% url 'login' %}">Log in</a>
+            Already not have an account? <a href="{% url 'signup' %}">Sign Up</a>
           </div>
         </div>
       </div>
