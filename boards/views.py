@@ -9,6 +9,7 @@ from . import models
 # import models
 from . import forms
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required 
 
 # Create your views here.
 
@@ -40,22 +41,22 @@ def board_topics(request, board_name):
 
 
 # New Topic
+@login_required
 def new_topic(request, board_name):
     
     board = get_object_or_404(models.Board, name=board_name)
-    user = User.objects.first()
     if request.method == "POST":
         form = forms.NewTopicForm(request.POST)
         if form.is_valid():
             topic = form.save(commit=False)
             topic.board = board
-            topic.created_by = user
+            topic.created_by = request.user
             topic.save()
             
             post = models.Post.objects.create(
                 comment=form.cleaned_data.get('comment'),
                 topic=topic,
-                created_by=user
+                created_by=request.user
             )
             
             return redirect('board_topics', board_name=board.name)
