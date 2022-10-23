@@ -1,4 +1,3 @@
-from multiprocessing import context
 from pydoc_data.topics import topics
 from unicodedata import name
 from django.shortcuts import render, get_object_or_404, redirect
@@ -65,3 +64,9 @@ def new_topic(request, board_name):
 
     context = {'board': board, 'form': form}
     return render(request, 'new_topic.html', context)
+
+
+def topic_posts(request, board_name, topic_id):
+    topic = get_object_or_404(models.Topic, board__name=board_name, pk=topic_id)
+    context = {'topic': topic}
+    return render(request, 'topic_posts.html', context)
