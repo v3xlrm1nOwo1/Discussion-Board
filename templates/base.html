@@ -53,14 +53,14 @@
             {% block content %}
             {% endblock %}
         </div>
-
+{% endblock %}
         <script src="{%static 'js/jquery-3.4.1.min.js'%}"></script>
         <script src="{%static 'js/popper.min.js'%}"></script>
       <script src="{%static 'js/bootstrap.min.js'%}"></script>
       <!-- <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
       <script src="https://netdna.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script> -->
 
-        <footer class="footer bg-dark text-center text-white relative-bottom">
+<footer class="footer-expand-sm bg-dark text-center text-white relative-bottom min-width g-width-1000">
           <!-- Grid container -->
           <div class="container p-4 pb-0">
             <!-- Section: Social media -->
@@ -97,6 +97,5 @@
           </div>
           <!-- Copyright -->
         </footer>
-        {% endblock %}
     </body>
 </html>

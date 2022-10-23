@@ -9,11 +9,17 @@
 {% endblock %}
 
 {% block content %}
-{% for post in topic.posts.all %}
+<br>
+<br>
+
+<div><a href="{% url 'reply_topic' topic.board.name topic.pk %}" class="btn btn-primary">Reply</a></div>
+
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 <div class="container">
+    {% for post in topic.posts.all %}
+
 <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-9">
         <div class="media g-mb-30 media-comment">
             <img class="d-flex g-width-50 g-height-50 rounded-circle g-mt-3 g-mr-15" src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Image Description">
             <div class="media-body u-shadow-v18 g-bg-secondary g-pa-30">
@@ -45,18 +51,23 @@
                 </li>
               </ul>
               {% if post.created_by == user %}
+                <br>
                 <a href="#" class="btn btn-primary btn-sm">Edit</a>
               {% endif %}
             </div>
         </div>
     </div>
 </div>
-{% endfor %}
 
+{% endfor %}
+</div>
+<br>
+<br>
+<br>
 <style type="text/css">
     body{
         margin-top:20px;
-        background:rgb(219, 214, 214);
+        background: #ffffffc5;
     }
     @media (min-width: 0) {
         .g-mr-15 {
@@ -84,11 +95,11 @@
     }
     
     .g-bg-secondary {
-        background-color: #fafafa !important;
+        background-color: #e7e9f0 !important;
     }
     
     .u-shadow-v18 {
-        box-shadow: 0 5px 10px -6px rgba(0, 0, 0, 0.15);
+        box-shadow: 0 15px 10px -6px rgba(0, 0, 0, 0.15);
     }
     
     .g-color-gray-dark-v4 {

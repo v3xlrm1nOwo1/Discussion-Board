@@ -1,4 +1,6 @@
+from dataclasses import fields
 from logging import PlaceHolder
+from statistics import mode
 from django import forms
 from . import models
 
@@ -10,3 +12,10 @@ class NewTopicForm(forms.ModelForm):
         
         model = models.Topic
         fields = ['subject', 'comment']
+        
+        
+class PostForm(forms.ModelForm):
+    
+    class Meta:
+        model = models.Post
+        fields = ['comment']
