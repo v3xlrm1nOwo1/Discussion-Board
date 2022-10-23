@@ -25,7 +25,7 @@
     <tbody>
         {% for topic in board.topics.all %}
         <tr>
-            <td>{{topic.subject}}</td>
+            <td><a href="{% url 'topic_posts' board.name topic.id %}">{{topic.subject}}</td>
             <td>{{topic.created_by}}</td>
             <td>0</td>
             <td>0</td>
