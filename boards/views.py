@@ -70,3 +70,20 @@ def topic_posts(request, board_name, topic_id):
     topic = get_object_or_404(models.Topic, board__name=board_name, pk=topic_id)
     context = {'topic': topic}
     return render(request, 'topic_posts.html', context)
+
+
+@login_required
+def reply_topic(request, board_name, topic_id):
+    topic = get_object_or_404(models.Topic, board__name=board_name, pk=topic_id)
+    if request.method == "POST":
+        form = forms.PostForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.topic = topic
+            post.created_by = request.user
+            post.save()
+            return redirect('topic_posts', board_name=topic.board.name, topic_id=topic.pk)
+    else:
+        form = forms.PostForm()
+    context = {'topic': topic, 'form': form}
+    return render(request, 'reply_topic.html', context)
