@@ -22,9 +22,17 @@
                     <td><a href="{% url 'board_topics' board.name%}">{{board.name}}</a>
                         <small class="text-muted d-block">{{board.description}}</small>
                     </td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
+                    <td>{{ board.topics.count }}</td>
+                    <td>{{ board.get_posts_count }}</td>
+                    <td>
+                        {% with post=board.get_last_post %}
+                            {% if post %}
+                                By {{ post.created_by.username }} at {{ post.created_dt }}
+                            {% else %}
+                                No post
+                            {% endif %}
+                        {% endwith %}
+                    </td>
                 </tr>
             {% endfor %}
         </tbody>

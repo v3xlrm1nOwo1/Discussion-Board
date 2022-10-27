@@ -1,5 +1,3 @@
-from pydoc_data.topics import topics
-from unicodedata import name
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
 import random
@@ -7,8 +5,8 @@ from . import models
 # import .models
 # import models
 from . import forms
-from django.contrib.auth.models import User
-from django.contrib.auth.decorators import login_required 
+from django.contrib.auth.decorators import login_required
+from django.db.models import Count
 
 # Create your views here.
 
@@ -35,7 +33,8 @@ def home(request):
 def board_topics(request, board_name):
 
     board = get_object_or_404(models.Board, name=board_name)
-    context = {'board': board}
+    topics = board.topics.order_by("-created_dt").annotate(count_post=Count('posts'))
+    context = {'board': board, 'topics': topics}
     return render(request, 'topics.html', context)
 
 
@@ -68,6 +67,9 @@ def new_topic(request, board_name):
 
 def topic_posts(request, board_name, topic_id):
     topic = get_object_or_404(models.Topic, board__name=board_name, pk=topic_id)
+    topic.views += 1
+    topic.save()
+    
     context = {'topic': topic}
     return render(request, 'topic_posts.html', context)
 
