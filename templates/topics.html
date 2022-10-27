@@ -23,13 +23,14 @@
         </tr>
     </thead>
     <tbody>
-        {% for topic in board.topics.all %}
+        {% for topic in topics %}
         <tr>
-            <td><a href="{% url 'topic_posts' board.name topic.id %}">{{topic.subject}}</td>
-            <td>{{topic.created_by}}</td>
-            <td>0</td>
-            <td>0</td>
-            <td>{{topic.created_dt}}</td>
+            <td><a href="{% url 'topic_posts' board.name topic.id %}">{{ topic.subject }}</td>
+            <td>{{ topic.created_by }}</td>
+            <!-- <td>{{ topic.posts.count }}</td> -->
+            <td>{{ topic.count_post }}</td>
+            <td>{{ topic.views }}</td>
+            <td>{{ topic.created_dt }}</td>
         </tr>
         {% endfor %}
     </tbody>
