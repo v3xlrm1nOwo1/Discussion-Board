@@ -1,0 +1,22 @@
+{% extends 'base.html'%}
+
+{% load static %}
+
+{% block title %}Edit Post{% endblock %}
+
+{% block item %}
+    <li class="breadcrumb-item"><a href="{% url 'home' %}">Boards</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'board_topics' post.topic.board.name %}">{{ post.topic.board.name }}</a></li>
+    <li class="breadcrumb-item "><a href="{% url 'topic_posts' post.topic.board.name post.topic.pk %}">{{ post.topic.subject }}</a></li>
+    <li class="breadcrumb-item active">Edit</li>
+{% endblock %}
+
+{% block content %}
+
+<form method="post" novalidate class="mb-4">
+    {% csrf_token %}
+    {% include 'includes/form.html' %}
+    <button type="submit" class="btn btn-success">Save Changes</button>
+</form>
+
+{% endblock %}
