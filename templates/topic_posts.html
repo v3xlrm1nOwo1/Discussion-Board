@@ -58,7 +58,7 @@
               </ul>
               {% if post.created_by == user %}
                 <br>
-                <a href="#" class="btn btn-primary btn-sm">Edit</a>
+                <a href="{% url 'edit_post' post.topic.board.name post.topic.pk post.pk %}" class="btn btn-primary btn-sm">Edit</a>
               {% endif %}
             </div>
         </div>
