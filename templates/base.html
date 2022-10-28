@@ -37,16 +37,15 @@
                   <a href="{% url 'login' %}" class="btn btn-outline-secondary">login</a>
                   <a href="{% url 'signup' %}" class="btn btn-primary ml-2">signup</a>
                   </form>
-                      {%endif%}
-          
+                      {%endif%}         
               </div>
             </div>
           </nav>
           <br>
           <br>
           <br>
-        <div class="container">
-            <ol class="breadcrumb my-4">
+        <div class="container" class="mb-4">
+            <ol class="breadcrumb my-4" class="mb-4">
                 {% block item %}{% endblock %}
             </ol>
             {% block content %}

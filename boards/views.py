@@ -1,3 +1,4 @@
+from unicodedata import name
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
 import random
@@ -7,7 +8,9 @@ from . import models
 from . import forms
 from django.contrib.auth.decorators import login_required
 from django.db.models import Count
-
+from django.views import generic
+from django.utils import timezone
+from django.utils.decorators import method_decorator
 # Create your views here.
 
 def test(request):
@@ -22,11 +25,17 @@ def test(request):
 
 
 # Home Page
-def home(request):
+# def home(request):
 
-    boards = models.Board.objects.all()
-    context = {'boards': boards}
-    return render(request, 'home.html', context)
+#     boards = models.Board.objects.all()
+#     context = {'boards': boards}
+#     return render(request, 'home.html', context)
+
+class BoardListView(generic.ListView):
+    
+    model = models.Board
+    context_object_name = 'boards'
+    template_name = 'home.html'
 
 
 # board topics
@@ -89,3 +98,24 @@ def reply_topic(request, board_name, topic_id):
         form = forms.PostForm()
     context = {'topic': topic, 'form': form}
     return render(request, 'reply_topic.html', context)
+
+
+# GCBV
+@method_decorator(login_required, name='dispatch')
+class EditPostView(generic.UpdateView):
+    
+    model = models.Post 
+    fields = ['comment', ] # field name
+    template_name = 'edit_post.html' # name the template
+    pk_url_kwarg = 'post_id' # post_id is name of var in url
+    context_object_name = 'post' # post is name of object to move 
+    
+    def form_valid(self, form):
+        
+        post = form.save(commit=False)
+        post.updated_by = self.request.user
+        post.updated_dt = timezone.now()
+        post.save()
+        return redirect('topic_posts', board_name=post.topic.board.name, topic_id=post.topic.pk)
+    
+    
